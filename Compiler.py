@@ -10,14 +10,14 @@ from dotenv import load_dotenv
 
 def auth():
     load_dotenv()  # take environment variables from .env.
-    # return ("62FVCU5OI06KTSLL")
     return os.environ.get("ALPHAVANTAGE_API")
 
 def compile_text(set_tweets):
     alpha_API = auth()
     ticker_universe = alphavantage_list(alpha_API) # Find intersection of Tickers List & Tweets List
     compiled = set_tweets.intersection(ticker_universe)
-    compiled= str(compiled).split().upper()
+    compiled = list(compiled)
+    compiled = str(compiled).split().upper()
     return compiled
 
 def alphavantage_list(ALPHAVANTAGE_API): # Takes the Alphavantage Key and returns a stripped, upper case set. Will be used to intersect with tweet text

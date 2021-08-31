@@ -13,7 +13,6 @@ tickers = {}
 
 def auth():
     load_dotenv()  # take environment variables from .env.
-    # return ("AAAAAAAAAAAAAAAAAAAAAOGUTAEAAAAAmQ9%2Brgtjkg7YLpPEQhKlahLu%2F64%3DPYmvZNk6HchoUE6f8QI1FxpulgXsCi7L4KS3ZOe5CLNQ2jfXow")
     return os.environ.get("BEARER_TOKEN")
 
 
