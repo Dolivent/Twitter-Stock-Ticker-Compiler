@@ -64,6 +64,7 @@ def count_ticker(ticker, username):
 
 def print_tickers():
     total = []
+    prefixed_tickers = []
     for result in tickers.items():
         ticker = result[0]
         authors = result[1]
@@ -75,15 +76,23 @@ def print_tickers():
     for element in total:
         print(element[1] + " -> " + str(element[0]))
         print(json.dumps(tickers[element[1]], indent=4))
+        prefixed_tickers.append("{}, ".format(element[1][1:]))
         #todo take top 10 results and print them in Combined File under Tradingview section ###MOST MENTIONED followed by ###OTHERS
     #top_10 =
     # return top_10
+    prefixed_tickers = (''.join(prefixed_tickers))
+    return prefixed_tickers
 
 def main():
     list_tweets = []
     set_tweets = set()
     tl = following.main()
     bearer_token = auth()
+
+    # now = datetime.datetime.now().strftime("%y%m%d %H")  # Creates document with all text & creates string variable for all test from tweets
+    # all_tweets_title = "SS All Tweets " + now + ".txt"
+    # all_tweets_file = open(all_tweets_title, 'w', encoding="utf-8")
+
     for username in tl:
         url = create_url(username)
         headers = create_headers(bearer_token)
@@ -91,13 +100,7 @@ def main():
         if "data" in json_response.keys(): #If the tweet isnt blank....
             for tweet in json_response['data']:
                 text = tweet["text"]  #...and if the tweet contains text...
-
-                now = datetime.datetime.now().strftime("%y%m%d %H") # Creates document with all text & creates string variable for all test from tweets
-                all_tweets_title = "SS All Tweets " + now + ".txt"
-                all_tweets_file = open(all_tweets_title, 'w', encoding="utf-8")
                 list_tweets.append(text)
-                all_tweets_file.close()
-
                 if "$" in text: #...then run get_ticker() to retrieve tickers
                     get_ticker(text, username)
 
@@ -107,18 +110,22 @@ def main():
                 continue
             set_tweets.add(word.upper())
 
-    print_tickers()
+    prefixed_tickers = print_tickers()
+
     #top_10 = str("###Most Mentioned, " + print_tickers() + "###Other Tickers")
 
-    compiled = Compiler.compile_text(set_tweets) # Returns compiled string
+    unprefixed_tickers = Compiler.unprefixed_tickers(set_tweets) # Returns compiled string
+    compiled = prefixed_tickers + unprefixed_tickers
 
+    now = datetime.datetime.now().strftime("%y%m%d %H")
     compiled_title = "ZZZ Watchlist " + now + ".txt"
     compiled_file = open(compiled_title, 'w', encoding="utf-8")
     # compiled_file.write(top_10)
     # compiled_file.append(compiled)
+    # compiled_file.write(prefixed_tickers)
+    # compiled_file.append(unprefixed_tickers)
     compiled_file.write(compiled)
     compiled_file.close()
-
 
 if __name__ == "__main__":
     main()

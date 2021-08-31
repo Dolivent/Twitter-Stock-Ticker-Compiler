@@ -9,7 +9,8 @@ def auth():
 
 
 def create_url():
-    user_id = 928331587636420608
+    load_dotenv()  # take environment variables from .env.
+    user_id = os.environ.get("user_id")
     return "https://api.twitter.com/2/users/{}/following".format(user_id)
 
 
