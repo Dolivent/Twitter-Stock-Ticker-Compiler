@@ -1,13 +1,19 @@
 import requests
 import os
 import json
+import Compiler
 import following
 import datetime
+import sys
+import csv
+from dotenv import load_dotenv
 
 tickers = {}
 
 
 def auth():
+    load_dotenv()  # take environment variables from .env.
+    # return ("AAAAAAAAAAAAAAAAAAAAAOGUTAEAAAAAmQ9%2Brgtjkg7YLpPEQhKlahLu%2F64%3DPYmvZNk6HchoUE6f8QI1FxpulgXsCi7L4KS3ZOe5CLNQ2jfXow")
     return os.environ.get("BEARER_TOKEN")
 
 
@@ -105,7 +111,7 @@ def main():
     print_tickers()
     #top_10 = str("###Most Mentioned, " + print_tickers() + "###Other Tickers")
 
-    compiled = compile.compile_text(set_tweets) # Returns compiled string
+    compiled = Compiler.compile_text(set_tweets) # Returns compiled string
 
     compiled_title = "ZZZ Watchlist " + now + ".txt"
     compiled_file = open(compiled_title, 'w', encoding="utf-8")
