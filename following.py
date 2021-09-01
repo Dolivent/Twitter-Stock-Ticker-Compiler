@@ -7,17 +7,14 @@ def auth():
     load_dotenv()  # take environment variables from .env.
     return os.environ.get("BEARER_TOKEN")
 
-
 def create_url():
     load_dotenv()  # take environment variables from .env.
     user_id = os.environ.get("user_id")
     return "https://api.twitter.com/2/users/{}/following".format(user_id)
 
-
 def create_headers(bearer_token):
     headers = {"Authorization": "Bearer {}".format(bearer_token)}
     return headers
-
 
 def connect_to_endpoint(url, headers, params):
     response = requests.request("GET", url, headers=headers, params=params)

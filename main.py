@@ -10,29 +10,24 @@ from dotenv import load_dotenv
 
 tickers = {}
 
-
 def auth():
     load_dotenv()  # take environment variables from .env.
     return os.environ.get("BEARER_TOKEN")
-
 
 def create_url(username):
     query = "from:{} -is:reply -is:retweet".format(username)
     url = "https://api.twitter.com/2/tweets/search/recent?query={}".format(query)
     return url
 
-
 def create_headers(bearer_token):
     headers = {"Authorization": "Bearer {}".format(bearer_token)}
     return headers
-
 
 def connect_to_endpoint(url, headers):
     response = requests.request("GET", url, headers=headers)
     if response.status_code != 200:
         raise Exception(response.status_code, response.text)
     return response.json()
-
 
 def get_ticker(text, username):
     end = [" ", ".", ",", "\n"]
@@ -50,7 +45,6 @@ def get_ticker(text, username):
     if "$" in text:
         get_ticker(text, username)
 
-
 def count_ticker(ticker, username):
     if ticker in tickers.keys():
         ticker_authors = tickers[ticker]
@@ -60,7 +54,6 @@ def count_ticker(ticker, username):
             tickers[ticker][username] = 1
     else:
         tickers[ticker] = {username: 1}
-
 
 def print_tickers():
     total = []
@@ -77,10 +70,6 @@ def print_tickers():
         print(element[1] + " -> " + str(element[0]))
         print(json.dumps(tickers[element[1]], indent=4))
         prefixed_tickers.append("{}, ".format(element[1][1:]))
-        #todo take top 10 results and print them in Combined File under Tradingview section ###MOST MENTIONED followed by ###OTHERS
-    #top_10 =
-    # return top_10
-    # print(total)
 
     most_mentioned_tickers = []
     for set in total:
@@ -99,10 +88,6 @@ def main():
     set_tweets = set()
     tl = following.main()
     bearer_token = auth()
-
-    # now = datetime.datetime.now().strftime("%y%m%d %H")  # Creates document with all text & creates string variable for all test from tweets
-    # all_tweets_title = "SS All Tweets " + now + ".txt"
-    # all_tweets_file = open(all_tweets_title, 'w', encoding="utf-8")
 
     for username in tl:
         url = create_url(username)
@@ -125,15 +110,10 @@ def main():
 
     unprefixed_tickers = Compiler.unprefixed_tickers(set_tweets) # Returns compiled string
     compiled = "###Most Mentioned, " + most_mentioned_tickers + ", ###Other Tickers" + prefixed_tickers +unprefixed_tickers
-    print(compiled)
 
     now = datetime.datetime.now().strftime("%y%m%d %H")
     compiled_title = "ZZZ Watchlist " + now + ".txt"
     compiled_file = open(compiled_title, 'w', encoding="utf-8")
-    # compiled_file.write(top_10)
-    # compiled_file.append(compiled)
-    # compiled_file.write(prefixed_tickers)
-    # compiled_file.append(unprefixed_tickers)
     compiled_file.write(compiled)
     compiled_file.close()
 
