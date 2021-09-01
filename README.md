@@ -20,7 +20,7 @@ The directory must contain a file called ".env" with the following text:
 
     #the above are dummies. replace with your own keys and target twitter IDs (of feed you would like to extract from)
 
-Contributors
+**Contributors**
    - Forked from @xaviernadal https://github.com/xaviernadal/StockTickersSearch  (will add as a fork thingo on Github when I work out how to do that)
    - @[] helped with in depth revision of code as well as hands on logic and methogolody help and review [link]
    - @e0 guidence on logic and methodology as well as feedback on review https://github.com/e0 
