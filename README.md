@@ -11,7 +11,7 @@ Output is a file that is ready to upload to TradingView. It creates a list with 
 1. "Most Mentioned" - which includes all tickers with 3 or more mentions
 2. "Others" - which includes all tickers that were not $ prefixed and not mentioned more than 2 times. 
 
-**Requirements**
+**Get Started**
 The directory must contain a file called ".env" with the following text:
 
     ALPHAVANTAGE_API = 62FVCU5OI06KTS # go to https://www.alphavantage.co/support/#api-key to apply
@@ -19,6 +19,9 @@ The directory must contain a file called ".env" with the following text:
     user_id = 136959900147386 #Twitter ID of user. Use https://tweeterid.com/ to find quickly
 
     #the above are dummies. replace with your own keys and target twitter IDs (of feed you would like to extract from)
+
+**Dependencies**
+[]
 
 **Contributors**
    - Forked from @xaviernadal https://github.com/xaviernadal/StockTickersSearch  (will add as a fork thingo on Github when I work out how to do that)
