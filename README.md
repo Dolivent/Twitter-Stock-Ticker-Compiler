@@ -3,3 +3,7 @@ This application extracts all stock tickers mentioned in your twitter feed.  The
 Currently, the application: 
 1. Creates a text file which includes all tickers with a '$' prefix (method 1 mentioned above only, but not method 2) 
 2. 2. saves a full list of active tickers. 3. prints the number of times a stock ticker is mentioned &amp; which users mentioned it. 
+
+Output is a file that is ready to upload to TradingView. It creates a list with 2 subheadings
+1. "Most Mentioned" - which includes all tickers with 3 or more mentions
+2. "Others" - which includes all tickers that were not $ prefixed and not mentioned more than 2 times. 
