@@ -80,8 +80,19 @@ def print_tickers():
         #todo take top 10 results and print them in Combined File under Tradingview section ###MOST MENTIONED followed by ###OTHERS
     #top_10 =
     # return top_10
+    # print(total)
+
+    most_mentioned_tickers = []
+    for set in total:
+        mentions = int(set[0])
+        ticker_prefixed = set[1]
+
+        if mentions >= 3:
+            most_mentioned_tickers.append("{}".format(ticker_prefixed[1:]))
+    most_mentioned_tickers = (', '.join(most_mentioned_tickers))
     prefixed_tickers = (''.join(prefixed_tickers))
-    return prefixed_tickers
+
+    return prefixed_tickers, most_mentioned_tickers
 
 def main():
     list_tweets = []
@@ -110,12 +121,11 @@ def main():
                 continue
             set_tweets.add(word.upper())
 
-    prefixed_tickers = print_tickers()
-
-    #top_10 = str("###Most Mentioned, " + print_tickers() + "###Other Tickers")
+    prefixed_tickers, most_mentioned_tickers = print_tickers()
 
     unprefixed_tickers = Compiler.unprefixed_tickers(set_tweets) # Returns compiled string
-    compiled = prefixed_tickers + unprefixed_tickers
+    compiled = "###Most Mentioned, " + most_mentioned_tickers + ", ###Other Tickers" + prefixed_tickers +unprefixed_tickers
+    print(compiled)
 
     now = datetime.datetime.now().strftime("%y%m%d %H")
     compiled_title = "ZZZ Watchlist " + now + ".txt"
