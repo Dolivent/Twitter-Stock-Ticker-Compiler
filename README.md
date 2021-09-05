@@ -25,5 +25,5 @@ The directory must contain a file called ".env" with the following text:
 
 **Contributors**
    - Forked from @xaviernadal https://github.com/xaviernadal/StockTickersSearch  (will add as a fork thingo on Github when I work out how to do that)
-   - @[] helped with in depth revision of code as well as hands on logic and methogolody help and review as well as many hours of coaching and guidence [link]
+   - @xjb100 helped with in depth revision of code as well as hands on logic and methogolody help and review as well as many hours of coaching and guidence [https://github.com/xjb100
    - @e0 comments guidence on logic and methodology as well as feedback on review https://github.com/e0 
